@@ -43,10 +43,10 @@ function googleAnalyticsMiddleware(data) {
 
         // https://nodejs.org/api/stream.html#stream_transform
         data.stream = data.stream.pipe(new Transform({
-            decodeStrings: true,
+            decodeStrings: false,
             transform: function(chunk, encoding, next) {
                 //this.push(addGa(chunk.toString()));
-                this.push(addGa(iconv.decode(chunk.toString(), 'utf8')));
+                this.push(addGa(iconv.encode(chunk, 'utf8').toString()));
                 next();
             }
         }));
