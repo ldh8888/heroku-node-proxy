@@ -14,7 +14,7 @@ var querystring = require('querystring');
 var express = require('express');
 var unblocker = require('./lib/unblocker.js');
 var Transform = require('stream').Transform;
-
+var iconv = require("iconv-lite");
 var app = express();
 
 var google_analytics_id = process.env.GA_ID || null;
@@ -45,7 +45,8 @@ function googleAnalyticsMiddleware(data) {
         data.stream = data.stream.pipe(new Transform({
             decodeStrings: true,
             transform: function(chunk, encoding, next) {
-                this.push(addGa(chunk.toString()));
+                //this.push(addGa(chunk.toString()));
+                this.push(addGa(iconv.encode(chunk, 'gbk').toString('binary')));
                 next();
             }
         }));
