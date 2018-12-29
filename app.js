@@ -49,6 +49,7 @@ function googleAnalyticsMiddleware(data) {
                 //this.push(addGa(chunk.toString()));
                 var str = iconv.decode(chunk,'GB2312');
                 str = iconv.encode(str,'utf8');
+                str = iconv.decode(str,'utf8');
                 //var str = iconv.decode(chunk,'utf8');
                 this.push(addGa(str.toString()));
                 next();
