@@ -46,7 +46,7 @@ function googleAnalyticsMiddleware(data) {
             decodeStrings: false,
             transform: function(chunk, encoding, next) {
                 //this.push(addGa(chunk.toString()));
-                this.push(addGa(iconv.encode(chunk, 'utf8').toString()));
+                this.push(addGa(iconv.decode(chunk, 'utf8').toString()));
                 next();
             }
         }));
