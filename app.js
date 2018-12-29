@@ -44,7 +44,6 @@ function googleAnalyticsMiddleware(data) {
         // https://nodejs.org/api/stream.html#stream_transform
         data.stream = data.stream.pipe(new Transform({
             decodeStrings: false,
-            defaultEncoding:'gb2312',
             transform: function(chunk, encoding, next) {
                 this.push(addGa(chunk.toString()));
                 next();
